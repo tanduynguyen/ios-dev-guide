@@ -36,16 +36,16 @@ When you have to meet certain criteria to continue execution, try to exit early.
 
 ```swift
 if n.isNumber {
-// Use n here
+    // Use n here
 } else {
-return
+    return
 }
 ```
 
 use this:
 ```swift
 guard n.isNumber else {
-return
+    return
 }
 // Use n here
 ```
@@ -60,9 +60,9 @@ Instead, prefer this:
 
 ```swift
 if let foo = foo {
-// Use unwrapped `foo` value in here
+    // Use unwrapped `foo` value in here
 } else {
-// If appropriate, handle the case where the optional is nil
+    // If appropriate, handle the case where the optional is nil
 }
 ```
 
@@ -90,11 +90,11 @@ So, write these:
 
 ```swift
 var myGreatProperty: Int {
-return 4
+	return 4
 }
 
 subscript(index: Int) -> T {
-return objects[index]
+    return objects[index]
 }
 ```
 
@@ -102,15 +102,15 @@ return objects[index]
 
 ```swift
 var myGreatProperty: Int {
-get {
-return 4
-}
+	get {
+		return 4
+	}
 }
 
 subscript(index: Int) -> T {
-get {
-return objects[index]
-}
+    get {
+        return objects[index]
+    }
 }
 ```
 
@@ -130,7 +130,7 @@ However, definitions within those can leave access control implicit, where appro
 
 ```swift
 internal struct TheFez {
-var owner: Person = Joshaber()
+	var owner: Person = Joshaber()
 }
 ```
 
@@ -165,11 +165,11 @@ When accessing properties or methods on `self`, leave the reference to `self` im
 
 ```swift
 private class History {
-var events: [Event]
+	var events: [Event]
 
-func rewrite() {
-events = []
-}
+	func rewrite() {
+		events = []
+	}
 }
 ```
 
@@ -177,15 +177,15 @@ Only include the explicit keyword when required by the language—for example, i
 
 ```swift
 extension History {
-init(events: [Event]) {
-self.events = events
-}
+	init(events: [Event]) {
+		self.events = events
+	}
 
-var whenVictorious: () -> () {
-return {
-self.rewrite()
-}
-}
+	var whenVictorious: () -> () {
+		return {
+			self.rewrite()
+		}
+	}
 }
 ```
 
@@ -201,27 +201,27 @@ For example, this class hierarchy:
 
 ```swift
 class Vehicle {
-let numberOfWheels: Int
+    let numberOfWheels: Int
 
-init(numberOfWheels: Int) {
-self.numberOfWheels = numberOfWheels
-}
+    init(numberOfWheels: Int) {
+        self.numberOfWheels = numberOfWheels
+    }
 
-func maximumTotalTirePressure(pressurePerWheel: Float) -> Float {
-return pressurePerWheel * Float(numberOfWheels)
-}
+    func maximumTotalTirePressure(pressurePerWheel: Float) -> Float {
+        return pressurePerWheel * Float(numberOfWheels)
+    }
 }
 
 class Bicycle: Vehicle {
-init() {
-super.init(numberOfWheels: 2)
-}
+    init() {
+        super.init(numberOfWheels: 2)
+    }
 }
 
 class Car: Vehicle {
-init() {
-super.init(numberOfWheels: 4)
-}
+    init() {
+        super.init(numberOfWheels: 4)
+    }
 }
 ```
 
@@ -229,19 +229,19 @@ could be refactored into these definitions:
 
 ```swift
 protocol Vehicle {
-var numberOfWheels: Int { get }
+    var numberOfWheels: Int { get }
 }
 
 func maximumTotalTirePressure(vehicle: Vehicle, pressurePerWheel: Float) -> Float {
-return pressurePerWheel * Float(vehicle.numberOfWheels)
+    return pressurePerWheel * Float(vehicle.numberOfWheels)
 }
 
 struct Bicycle: Vehicle {
-let numberOfWheels = 2
+    let numberOfWheels = 2
 }
 
 struct Car: Vehicle {
-let numberOfWheels = 4
+    let numberOfWheels = 4
 }
 ```
 
@@ -260,10 +260,10 @@ Methods of parameterized types can omit type parameters on the receiving type wh
 
 ```swift
 struct Composite<T> {
-…
-func compose(other: Composite<T>) -> Composite<T> {
-return Composite<T>(self, other)
-}
+	…
+	func compose(other: Composite<T>) -> Composite<T> {
+		return Composite<T>(self, other)
+	}
 }
 ```
 
@@ -271,10 +271,10 @@ could be rendered as:
 
 ```swift
 struct Composite<T> {
-…
-func compose(other: Composite) -> Composite {
-return Composite(self, other)
-}
+	…
+	func compose(other: Composite) -> Composite {
+		return Composite(self, other)
+	}
 }
 ```
 
